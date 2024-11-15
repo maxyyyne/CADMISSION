@@ -1,0 +1,138 @@
+{% extends 'adhome.html' %}
+
+{% block head %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Page</title>
+<link rel="stylesheet" href="static/admin.css">
+<link rel="icon" href="static/img/logo.png" type="image/x-icon">
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <!-- Sidebar Section -->
+    <section class="sidebar">
+        <div class="logo">
+            <img src="img/logo.png" alt="Logo">
+            <h2>CADMISSION</h2>
+        </div>
+        <ul>
+            <li><a href="#" onclick="showSection('dashboard')">Dashboard</a></li>
+            <li><a href="#" onclick="showSection('transcription')">Transcription</a></li>
+            <li><a href="#" onclick="showSection('account-management')">Account Management</a></li>
+        </ul>
+    </section>
+
+    <!-- Main Content Section -->
+    <section class="main-content" id="main-content">
+        <header class="header">
+            <button class="logout" onclick="logout()">Log out</button>
+        </header>
+
+        <!-- Dashboard Section -->
+        <section class="content" id="dashboard">
+            <div class="cards">
+                <!-- Pass or Failed College Admission Applicants Chart -->
+                <article class="card">
+                    <h3>Pass or Failed College Admission Applicants</h3>
+                    <canvas id="passFailedApplicantsChart" class="small-chart"></canvas>
+                </article>
+
+                <!-- College Admission Applicants Pie Chart -->
+                <article class="card">
+                    <h3>College Admission Applicants</h3>
+                    <canvas id="admissionApplicantsChart" class="small-chart"></canvas>
+                </article>
+            </div>
+
+            <section class="interview-history">
+                <h2>Interview History</h2>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search">
+                    <div class="filters">
+                        <button>Course</button>
+                        <button>Year</button>
+                    </div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Course</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Maxyne Nuela Ignacio</td>
+                            <td>BS Computer Science</td>
+                            <td>4/7/2024</td>
+                        </tr>
+                        <tr>
+                            <td>Marivient Alexia R. Yurag</td>
+                            <td>BS Information Technology</td>
+                            <td>4/8/2024</td>
+                        </tr>
+                        <tr>
+                            <td>Byron R. Matuto</td>
+                            <td>BS Information Technology</td>
+                            <td>4/10/2024</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </section>
+
+        <!-- Transcription Section -->
+        <section class="transcription-section" id="transcription" style="display: none;">
+            <header class="transcription-header"></header>
+            <!-- Button to trigger the redirection via JavaScript -->
+            <button id="goToTranscriptionBtn">Go to Transcription Page</button>
+            <div id="transcriptionContent"></div>
+        </section>
+    </section>
+</div>
+
+<!-- Account Management Section -->
+<section class="content" id="account-management" style="display: none;">
+    <h2>Account Management</h2>
+    <div class="account-actions">
+        <button onclick="showForm('addAccountForm')">Add Account</button>
+    </div>
+
+    <table id="accountsTable">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="accountsBody">
+            <!-- User accounts will be populated here using JavaScript -->
+        </tbody>
+    </table>
+
+    <!-- Add/Edit Account Form -->
+    <section id="addAccountForm" style="display: none; margin-top: 20px;">
+        <h3 id="formTitle">Add Account</h3>
+        <form onsubmit="handleAccountForm(event)">
+            <label for="addName">Name:</label>
+            <input type="text" id="addName" required>
+            <label for="addUsername">Username:</label>
+            <input type="text" id="addUsername" required>
+            <label for="addPassword">Password:</label>
+            <input type="password" id="addPassword" required>
+            <button type="submit">Submit</button>
+            <button type="button" onclick="resetForm()">Cancel</button>
+        </form>
+    </section>
+</section>
+
+<!-- Include Chart.js and your custom admin.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="static/js/admin.js"></script>
+{% endblock %}
